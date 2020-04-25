@@ -1,0 +1,19 @@
+{
+  "name": "recipe-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matteo-Buonastella/Recipe.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Matteo-Buonastella/Recipe/issues"
+  },
+  "homepage": "https://github.com/Matteo-Buonastella/Recipe#readme"
+}
