@@ -1,0 +1,68 @@
+.landingPageTitle{
+    text-align: center;
+    margin: 0 auto;
+    background-color: white;
+    padding-bottom: 30px;
+    margin-top: 15px;
+}
+
+.landingPage-main{
+    background: #f6f6f6;
+    margin-bottom: 50px;
+}
+
+.accountCreatedMsg{
+    text-align: center;
+    color: green;
+    margin-bottom:25px;
+}
+
+.landingPage-Container{
+    margin-top: 40px;
+}
+
+.leftContainer{
+    margin-bottom: 40px;
+}
+
+.rightContainer{
+}
+
+.leftContainerMessage{
+    font-family: 'Roboto', 700, sans-serif;
+    color: #303030;
+    font-size: 40px
+}
+
+ul{
+    font-size: 20px
+}
+
+.landingPage-Login{
+    text-align: center;
+    margin: 0 auto;
+}
+
+.landingPage-discoverNow{
+    margin-top:50px;
+    margin-bottom:40px;
+    font-size: 30px;
+    font-family: 'Roboto', 700, sans-serif;
+    color: #303030;
+}
+
+.landingPage-div{
+    padding: 0;
+    margin: 0;
+}
+
+.main-footer{
+    background-color: green;
+    color: white;
+    bottom: 0;
+    position: relative;
+}
+
+.footerRow{
+    padding:10px
+}

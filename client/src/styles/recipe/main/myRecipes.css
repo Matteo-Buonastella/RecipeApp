@@ -1,0 +1,35 @@
+.recipeCard{
+    width: 20rem;
+}
+
+.recipeCardBody{
+    text-align: center;
+}
+
+.viewButton{
+  /*  margin-right: 20px; */ /* Enabled if you also want to display edit button and create a gap between them */
+}
+
+.myRecipeMain{
+    margin-top: 50px;
+}
+
+.recipeMessage{
+    text-align: center;
+    color: green;
+}
+
+.myRecipeIndexNotification{
+    margin-top:30px;
+    font-size: 1.4em;
+}
+
+.searchMyRecipeBtn{
+    margin-left: 10px;
+    width: 100px;
+}
+
+.searchRecipeDiv{
+    text-align: center;
+    margin-bottom: 15px;
+}

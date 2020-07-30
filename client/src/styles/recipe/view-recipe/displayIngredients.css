@@ -1,0 +1,19 @@
+.ingredientListDiv{
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.ingredientItemName{
+    font-size: 1.2em;
+}
+
+
+.subIngredientsListsssDiv{
+}
+
+@media only screen and (max-width: 700px) {
+    .ingredientListDiv {
+        justify-content: center;
+    }
+  }

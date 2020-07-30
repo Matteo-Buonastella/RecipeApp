@@ -1,0 +1,23 @@
+.registerPageTitle{
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+
+.registerForm{
+    width:350px !important;
+}
+
+.registerButtonDiv{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.centerDiv{
+    text-align:center;
+}
+
+.errorMessage{
+    text-align: center;
+    color: red;
+}

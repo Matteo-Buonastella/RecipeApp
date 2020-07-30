@@ -1,0 +1,31 @@
+
+.viewRecipeTopDiv{
+    margin-top:15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.recipeTitle{
+    text-align: center;
+}
+
+.editRecipeButton{
+    margin-right:20px;
+}
+
+.updateRecipeMessage{
+    text-align: center;
+    color: green;
+    font-size: 1.3em;
+    margin-top: 15px;
+}
+
+.unsaveRecipeBtn:hover>span{
+   display:none;
+}
+
+
+
+.unsaveRecipeBtn:hover:before{
+    content: "Unsave";
+ }

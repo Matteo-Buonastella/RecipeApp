@@ -1,0 +1,16 @@
+form>input{
+    width:250px;
+    height: 40px;
+}
+
+.loginButtonDiv{
+    text-align: center;
+}
+
+.loginError{
+    color:red;
+}
+
+.loginDiv{
+    background-color: aqua;
+}

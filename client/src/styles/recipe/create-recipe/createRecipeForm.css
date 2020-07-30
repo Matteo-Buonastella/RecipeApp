@@ -1,0 +1,104 @@
+.createRecipeDiv{
+    text-align: center;
+}
+
+.createRecipeIngredientsDiv{
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.formBackButton{
+    margin-right: 30px;
+}
+
+.createRecipeButton{
+    width:75px;
+}
+
+.ingredientsAddedDiv{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+
+.stepsAddedDiv{
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    max-width: 500px;
+    width: 500px
+}
+
+.subIngredientsAddedDiv{
+    text-align: left;
+}
+
+.ingredientsList{
+    display: flex;
+    /*align-items: center;
+    justify-content: center; */
+}
+
+.stepListItem{
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-x: hidden;
+    text-align: left;
+    display: flex;
+}
+
+
+.createRecipeForm-displayCookingSteps{
+    width: 100%;
+    text-align: left;
+    font-size: 1.3em;
+    white-space: normal;
+    overflow-x: hidden;
+}
+
+.createRecipeForm-ingredientsAddedTitle{
+    margin-bottom: 40px;
+}
+
+.ingredientListItem{
+    font-size: 1.3em;
+}
+
+.ingredientListItem2{
+    font-size: 1em;
+    text-indent: 2em;
+}
+
+.removeIngredientButton{
+    vertical-align: middle;
+}
+
+.errMsg{
+    color: red;
+    text-align: center;
+}
+
+.formRequired{
+    color:red;
+}
+
+
+.removeItemButton{
+    height:28px;
+}
+
+.notBold{
+    font-weight:normal;
+}
+
+.createRecipeForm-displayCooingSteps{
+    word-break: break-all;
+}
+
+.inline-block{
+    display: inline-block;
+}
+
+.createRecipeForm-review{
+    margin-bottom: 15px;
+}

@@ -4,7 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "server": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,25 @@
   "bugs": {
     "url": "https://github.com/Matteo-Buonastella/Recipe/issues"
   },
-  "homepage": "https://github.com/Matteo-Buonastella/Recipe#readme"
+  "homepage": "https://github.com/Matteo-Buonastella/Recipe#readme",
+  "dependencies": {
+    "@popperjs/core": "^2.4.4",
+    "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1",
+    "jquery": "^3.5.1",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.10",
+    "popper.js": "^1.16.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "reactstrap": "^8.5.1",
+    "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }

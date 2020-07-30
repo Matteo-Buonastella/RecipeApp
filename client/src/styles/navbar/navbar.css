@@ -1,0 +1,15 @@
+.hoverOpacity:hover{
+    opacity: 0.5;
+}
+
+.dropdownTitle{
+    opacity: 1;
+}
+
+.nav-link{
+    color: black !important
+}
+
+.nav-link:hover{
+    opacity: 0.5;
+}
