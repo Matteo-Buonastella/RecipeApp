@@ -3,22 +3,16 @@ import '../styles/landingPage.css'
 import Login from './login/login'
 import {Link} from 'react-router-dom'
 import Footer from './footer/footer'
+import Notification from './notification/index'
 
 class LandingPage extends Component {
 
-    //function returns a notification to the user for various reasons
+    //function returns a notification to the user for various reasons. Message and color are recieved as props
     Notification(){
         try{
-            //New Account
-            if(this.props.location.state.accountCreated === true){
-                this.props.location.state.accountCreated = false; //reset 
-                return <h4 className="accountCreatedMsg">Congratulations, your account has been created!</h4>
+            if(this.props.location.state.notification === true){
+                return <Notification message={this.props.location.state.message} color={this.props.location.state.color}/>
             } 
-            //Password updated
-            else if(this.props.location.state.updatedPassword === true){
-                this.props.location.state.updatedPassword = false; //reset 
-                return <h4 className="accountCreatedMsg">Success, your password has been updated!</h4>
-            }
         } catch(e){}
     }
 

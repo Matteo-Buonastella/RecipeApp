@@ -29,7 +29,7 @@ class Index extends Component {
         }
         axios.post('/createBugReport', bugDetail).then((response)=>{
             this.setState({errMsg: ""})
-            this.props.history.push({pathname: "/Home", state:{bugSubmited: true}})
+            this.props.history.push({pathname: "/Home", state:{notification: true, message: "Thank you, your bug has been reported!", color: "green"}})
         }).catch((error)=>{
             this.setState({errMsg: "Error 500, can't submit bug report"})
         })

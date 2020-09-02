@@ -24,6 +24,7 @@ class RecipeSearchResults extends Component {
                   <p> This will find recipes that contain ALL the ingredients you entered. For example if a recipe contains only 2 of the 3 ingredients you entered, it will NOT display.</p>
                   <p><i>3. Search By Recipe Name and Ingredients</i></p>
                   <p> This combines the first 2 options. The recipe must contain all the ingredients you entered and must contain the Recipe name you entered</p>
+                  <p>*Secret recipes will not be displayd</p>
                   <button onClick={onClose}>OK</button>
                 </div>
               );

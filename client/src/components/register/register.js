@@ -64,14 +64,15 @@ class register extends Component {
                         
                         axios.post('/sendWelcomeEmail', data).then((response)=>{
                             //Redirect User to Home Page
-                            this.props.history.push({pathname: "/", state:{accountCreated: true}}) 
+                            this.props.history.push({pathname: "/", state:{notification: true, message: "Congratulations, your account has been created!", color:"green"}}) 
                         }).catch((exception)=>{
                             //Something wrong with sending email, redirect user anyway
-                            this.props.history.push({pathname: "/", state:{accountCreated: true}}) 
+                            this.props.history.push({pathname: "/", state:{notification: true, message: "Congratulations, your account has been created!", color:"green"}}) 
                         });
                     });
                 }).catch((error)=>{
                     this.setState({errorMessage: error, loading: false})
+                    this.props.history.push({pathname: "/", state:{notification: true, message: "Error: Can't create account", color:"red"}})
                 })
             }).catch((error)=>{
                 this.setState({errorMessage: error, loading: false})

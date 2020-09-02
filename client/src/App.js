@@ -12,6 +12,7 @@ import ResetPassword from './components/account/reset-password/index'
 import Discover from './components/recipe/discover/index'
 import Bug from './components/user/bug/index'
 import FeatureRequest from './components/user/feature-request/index'
+import ReportRecipe from './components/account/report/report-recipe/index'
 
 import {Provider} from 'react-redux'; //Wraps everything insider provider //
 import {store, persistor} from './store';
@@ -35,6 +36,7 @@ function App() {
                 <Route path ="/Discover" component={Discover} />
                 <ProtectedRoute path ="/ReportBug" component={Bug} />
                 <ProtectedRoute path ="/FeatureRequest" component={FeatureRequest} />
+                <ProtectedRoute path ="/ReportRecipe" component={ReportRecipe} />
 
                 <Route  path ="/*" component={() => "Error 404 Page Not Found"} />
               </Switch>

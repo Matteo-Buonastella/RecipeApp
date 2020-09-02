@@ -33,7 +33,7 @@ class CreateRecipeForm extends Component {
             ingredientAmount: "",
             ingredientMeasurement: "",
             ingredientMeasurementId: 1,  //Default Id is empty
-            stepsList: [],
+            stepsList: [],   // id, name
             cookingStep: "",
             cookingStepId: 1, 
         }
@@ -87,7 +87,7 @@ class CreateRecipeForm extends Component {
                     servings: this.props.location.state.recipe.Servings,
                     ingredients: ingredientArray,
                     stepsList: stepsArray,
-                    cookingStepId: stepsArray.length + 1,
+                    cookingStepId: stepsArray.length,
                     ingredientId: ingredientArray.length + 1
                 })
                 //Check if recipe is a secret or not and set to state
@@ -186,9 +186,22 @@ class CreateRecipeForm extends Component {
         })
     }
 
+    //Function takes array of steps and reorders id's so that they are sequential, id: 1,2,4,5,7 => 1,2,3,4,5, 
+    orderStepsListId(steps){
+        console.log(steps)
+        var id = 0;
+        var obj = steps.map((step, key)=>{
+            id++;
+            return {id: id, description: step.description}
+        })
+        console.log(obj)
+        return obj;
+    }
+
     updateRecipe(event){
         event.preventDefault();
         var recipeId = this.state.recipeId;
+        var orderedStepsList = this.orderStepsListId(this.state.stepsList); //reorder id's so that they are sequential
         var recipeDetail = {
             userId: this.props.userId,
             recipeId: recipeId,
@@ -210,9 +223,9 @@ class CreateRecipeForm extends Component {
                     deleteAllIngredientsFromRecipe(recipeId).then(()=>{
                         deleteAllStepsFromRecipe(recipeId).then(()=>{
                             insertIngredient(recipeId, this.state.ingredients).then(()=>{
-                                insertSteps(recipeId, this.state.stepsList).then(()=>{
+                                insertSteps(recipeId, orderedStepsList).then(()=>{
                                     this.props.getAllUserRecipes(this.props.userId);
-                                    this.props.history.push({pathname: "/ViewRecipe/"+(recipeId), state:{editedRecipe: true, notification:"Successfully Updated Recipe"}}) 
+                                    this.props.history.push({pathname: "/ViewRecipe/"+(recipeId), state:{notification: true, message:"Successfully Updated Recipe", color: "green"}}) 
                                 })
                             })
                         })
@@ -583,7 +596,7 @@ class CreateRecipeForm extends Component {
                         </div>
                         <div className="row justify-content-center">
                             <div className="col-lg-12 createRecipeForm-review">
-                                <h5>Steps ({this.state.stepsList.length}):</h5><h5 className="notBold createRecipeForm-displayCookingSteps"> {stepList}</h5>
+                                <h5>Steps ({this.state.stepsList.length}):</h5><h5 className="notBold createRecipeForm-reviewSteps"> {stepList}</h5>
                             </div>
                         </div>
                     </div>

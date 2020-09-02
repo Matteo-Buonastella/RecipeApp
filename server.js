@@ -11,7 +11,8 @@ const {getUserByNameOrEmailAndPassword, getUserById, getEmail, getUsername, addU
   getProcedureByRecipeId, getMeasurementOptions, createRecipe, insertIngredient, deleteAllIngredientsByRecipeId, insertCookingProcedure,
   deleteRecipeById, updateRecipe, deleteAllCookingProcedureByRecipeId, deleteEmailVerificationCodeByEmail, getSavedRecipe, saveRecipe,
   unsaveRecipe, createEmailVerificationCode, updatePasswordByEmail, searchForRecipeByName, searchForRecipebyIngredients, 
-  searchForRecipebyNameAndIngredients, searchAllRecipes, getMyRecipesAndSavedRecipes, createBugReport, createFeatureRequest} = require('./db-services.js');
+  searchForRecipebyNameAndIngredients, searchAllRecipes, getMyRecipesAndSavedRecipes, createBugReport, createFeatureRequest, getUserNameAndSavesByRecipeId,
+  getAllReportRecipeOption, insertReportRecipe, getDidUserAlreadyReportRecipe} = require('./db-services.js');
 
 //Get Requests
 app.get('/getUserByNameOrEmailAndPassword', getUserByNameOrEmailAndPassword);
@@ -28,7 +29,10 @@ app.get('/searchForRecipebyIngredients', searchForRecipebyIngredients);
 app.get('/searchForRecipebyNameAndIngredients', searchForRecipebyNameAndIngredients);
 app.get('/searchAllRecipes', searchAllRecipes);
 app.get('/getSavedRecipe', getSavedRecipe);
-app.get('/getMyRecipesAndSavedRecipes', getMyRecipesAndSavedRecipes)
+app.get('/getMyRecipesAndSavedRecipes', getMyRecipesAndSavedRecipes);
+app.get('/getUserNameAndSavesByRecipeId', getUserNameAndSavesByRecipeId);
+app.get('/getAllReportRecipeOption', getAllReportRecipeOption)
+app.get('/getDidUserAlreadyReportRecipe', getDidUserAlreadyReportRecipe)
 
 //Post Requests
 app.post('/addUser', addUser);
@@ -46,7 +50,7 @@ app.post('/saveRecipe', saveRecipe);
 app.post('/unsaveRecipe', unsaveRecipe);
 app.post('/createBugReport', createBugReport);
 app.post('/createFeatureRequest', createFeatureRequest);
-
+app.post('/insertReportRecipe', insertReportRecipe)
 
 //Email Requests
 //app.post('/sendWelcomeEmail', sendWelcomeEmail)
@@ -65,7 +69,7 @@ app.post('/sendWelcomeEmail', (req, res) => {
       from: 'mbuonastella@myseneca.ca', // sender address
       to: req.body.email,
       subject: 'Thanks for Signing Up', // Subject line
-      text: 'We at Recipes Online would like to welcome you. Enjoy storying your recipes online for FREE'// plain text body
+      text: 'We at Recipes Online would like to welcome you. Enjoy storing your recipes online for FREE'// plain text body
   };
   transporter.sendMail(welcomeEmail, function (err, info) {
       if(err){

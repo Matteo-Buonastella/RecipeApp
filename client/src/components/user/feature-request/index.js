@@ -1,3 +1,4 @@
+//Component allows user to request a feature
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import Navbar from '../../navbar/navbar'
@@ -29,7 +30,7 @@ class Index extends Component {
         }
         axios.post('/createFeatureRequest', featureDetail).then((response)=>{
             this.setState({errMsg: ""})
-            this.props.history.push({pathname: "/Home", state:{featureRequestSubmited: true}})
+            this.props.history.push({pathname: "/Home", state:{notification: true, message: "Thank you, your feature request has been submited!", color: "green"}})
         }).catch((error)=>{
             this.setState({errMsg: "Error 500, can't submit bug repofeature request"})
         })

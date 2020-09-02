@@ -62,6 +62,19 @@ export function getSavedRecipe(userId, recipeId){
     })
 }
 
+export function getUserNameAndSavesByRecipeId(recipeId){
+    return new Promise(function(resolve,reject){
+        var query = {
+            params: {
+                recipeId: recipeId
+            }
+        }
+        axios.get('/getUserNameAndSavesByRecipeId', query).then((response)=>{
+            resolve(response);
+        })
+    })
+}
+
 //Function recieves an array objects of ingredients
 export function insertIngredient(recipeId, ingredients){
     return new Promise(function(resolve,reject){
@@ -174,4 +187,5 @@ export function updatePasswordByEmail(email,password){
         })
     })
 }
+
 

@@ -29,7 +29,7 @@ class NewPassword extends Component {
         event.preventDefault();
         if(this.state.password === this.state.confirmPassword){
             updatePasswordByEmail(this.props.email, this.state.password).then((response)=>{
-                this.props.history.push({pathname: "/", state:{updatedPassword: true}}) 
+                this.props.history.push({pathname: "/", state:{notification: true, message: "Success, your password has been updated!", color: "green"}}) 
             }).catch((exception)=>{
                 this.setState({errMsg: "Server error. Unable to update password"})
             })

@@ -1,3 +1,4 @@
+//All recipes created by and saved by user gets displayed here. 
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import '../../../styles/recipe/main/myRecipes.css'
@@ -62,7 +63,7 @@ class MyRecipes extends Component {
             <div>
                 <div className="container">
 
-                    {/* Search Recipe Functionality*/}
+                    {/* Search Recipe Component*/}
                     <div className="row">
                         <Search recipes={this.props.recipe} handleRecipeSearch={this.handleRecipeSearch}/>
                     </div>

@@ -7,6 +7,7 @@ import {getAllUserRecipes, resetRecipes} from '../../../actions/recipeActions';
 import Navbar from '../../navbar/navbar'
 import MyRecipes from './myRecipes'
 import Search from '../../utils/search'
+import Notification from '../../notification/index'
 import '../../../styles/recipe/main/myRecipes.css'
 
 class Index extends Component {
@@ -14,12 +15,8 @@ class Index extends Component {
     //function returns a notification to user for various reasons 
     Notification(){
          try{
-             if(this.props.location.state.deletedRecipe === true){
-                 return <p className="recipeMessage">Recipe Successfully Deleted!</p>
-             } else if (this.props.location.state.bugSubmited === true){
-                return <p className="recipeMessage">Thank you, your bug has been reported!</p>
-             } else if (this.props.location.state.featureRequestSubmited === true){
-                 return <p className="recipeMessage">Thank you, your feature request has been submited!</p>
+             if(this.props.location.state.notification === true){
+                return <Notification message={this.props.location.state.message} color={this.props.location.state.color}/>
              }
          } catch(e){}
      }
@@ -33,6 +30,7 @@ class Index extends Component {
                 <div className="myRecipeIndexNotification">
                     {notification}
                 </div>
+                {/*Display all of my recipes and saved recipes*/}
                 <div className="main myRecipeMain"> 
                     <MyRecipes />
                 </div>

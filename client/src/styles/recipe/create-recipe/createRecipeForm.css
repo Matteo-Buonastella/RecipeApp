@@ -49,11 +49,16 @@
 
 
 .createRecipeForm-displayCookingSteps{
-    width: 100%;
+    word-wrap: break-word;
+    max-width: 100%;
     text-align: left;
     font-size: 1.3em;
     white-space: normal;
     overflow-x: hidden;
+}
+
+.createRecipeForm-reviewSteps{
+    max-width: 100%;
 }
 
 .createRecipeForm-ingredientsAddedTitle{
@@ -66,7 +71,7 @@
 
 .ingredientListItem2{
     font-size: 1em;
-    text-indent: 2em;
+   /* text-indent: 2em; */
 }
 
 .removeIngredientButton{

@@ -269,6 +269,41 @@ module.exports = {
             if(err) throw err;
             res.send(result)
         }) 
+    },
+
+    getUserNameAndSavesByRecipeId: (req,res) => {
+        var sql = "Select u.Username, Count(s.Saved_Recipe_Id_FK) As Saves FROM users u join recipe r ON u.User_Id = r.User_Id_FK left outer Join saved_recipe s ON s.Saved_Recipe_Id_FK = r.Recipe_Id Where r.Recipe_Id = (?)"
+        var value = [req.query.recipeId];
+        db.query(sql, value, function(err,result){
+            if(err) throw err;
+            res.send(result)
+        })
+    },
+
+    getAllReportRecipeOption: (req, res) => {
+        var sql = "Select * from report_recipe_option";
+        db.query(sql, function(err,result){
+            if(err) throw err;
+            res.send(result);
+        })
+    },
+
+    insertReportRecipe: (req,res) => {
+        var sql = "Insert into report_recipe values (default, ?, ?, ?, ?, current_timestamp)";
+        var values = [req.body.recipeId, req.body.reportOptionsId, req.body.userId, req.body.description];
+        db.query(sql, values, function(err,result){
+            if(err) throw err;
+            res.send(result);
+        })
+    },
+
+    getDidUserAlreadyReportRecipe: (req,res) => {
+        var sql = "Select * from report_recipe where Report_Recipe_Recipe_Id_FK = (?) AND Report_Recipe_By_User_Id_FK = (?)";
+        var value = [req.query.recipeId, req.query.userId];
+        db.query(sql, value, function(err,result){
+            if(err) throw err;
+            res.send(result);
+        })
     }
 
 }

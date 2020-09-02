@@ -7,20 +7,22 @@ import {connect} from 'react-redux'
 import {getAllUserRecipes} from '../../../actions/recipeActions';
 import {Link} from 'react-router-dom'
 import axios from 'axios';
-import {getIngredientsByRecepieId,getProcedureByRecipeId, getSavedRecipe} from '../../utils/functions'
+import {getIngredientsByRecepieId,getProcedureByRecipeId, getSavedRecipe, getUserNameAndSavesByRecipeId} from '../../utils/functions'
 import DisplayIngredients from './displayIngredients'
 import CookingProcedure from './displayProcedure'
+import Notification from '../../notification/index'
 import imageKey from '../../../assets/images/secret_recipe_key.png'
 import '../../../styles/recipe/view-recipe/viewRecipe.css'
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, DropdownButton,  } from 'react-bootstrap';
 
 import {getRecipeById, deleteRecipe} from '../../utils/functions';
-import Axios from 'axios';
 
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
         this.state = {
             userId: 0,
+            username: "", //Stores username of the user who owns recipe
             doesRecipeBelongToUser: false,
             recipeId: this.props.match.params.recipeId,
             recipe: {},
@@ -28,9 +30,11 @@ class ViewRecipe extends Component {
             procedure: [],
             savedRecipe: [],
             savedRecipeLoaded: false,
+            saves: 0,  //Stores how many people have saved the recipe
             errors: false,
             errorMessage: "",
             disableInput: false,
+            loaded: false,
         }
     }
 
@@ -49,7 +53,6 @@ class ViewRecipe extends Component {
             this.props.history.push('/Home')
         });
         getIngredientsByRecepieId(this.state.recipeId).then((response)=>{
-            console.log(response.data)
             this.setState({ingredient: response.data})
         }).catch((exception)=>{
             this.setState({errors: true, errorMessage: "ERROR: Ingredients Not Found"})
@@ -57,6 +60,9 @@ class ViewRecipe extends Component {
         });
         getProcedureByRecipeId(this.state.recipeId).then((response)=>{
             this.setState({procedure: response.data})
+        });
+        getUserNameAndSavesByRecipeId(this.state.recipeId).then((response)=>{
+            this.setState({username: response.data[0].Username, saves: response.data[0].Saves})
         });
         getSavedRecipe(this.state.userId, this.state.recipeId).then((response)=>{
             this.setState({savedRecipe: response.data, savedRecipeLoaded: true})
@@ -81,7 +87,9 @@ class ViewRecipe extends Component {
                 label: 'Yes',
                 onClick: () => deleteRecipe(this.state.recipeId).then((response)=>{
                     this.props.getAllUserRecipes(this.props.userId);
-                    this.props.history.push({pathname: "/Home", state:{deletedRecipe: true}}) 
+                    this.props.history.push({pathname: "/Home", state:{notification: true, message: "Recipe Successfully Deleted!", color: "green"}}) 
+                }).catch((e)=>{
+                    this.props.history.push({pathname: "/Home", state:{notification: true, message: "Error, unable to delete recipe", color: "red"}}) 
                 })
               },
               {
@@ -118,10 +126,29 @@ class ViewRecipe extends Component {
         })
     }
 
+    //Redirects user to report recipe page where they can confirm the report
+    redirectToReportRecipe = (event) =>{
+        event.preventDefault();
+        this.props.history.push({pathname: '/ReportRecipe', state:{
+            userId: this.state.userId, 
+            recipeId: this.state.recipeId,
+            username: this.state.username, 
+            recipe: this.state.recipe
+        }}) 
+    }
+
     //Only display edit button if recipe is yours
     displayEditButton(){
         if(this.state.doesRecipeBelongToUser === true){
-            return <Link to={{pathname:"/EditRecipe", state:{editRecipe: true, recipe: this.state.recipe, ingredients: this.state.ingredient, procedure: this.state.procedure} }} className="btn btn-warning editRecipeButton">Edit</Link>
+            return <Link to={{pathname:"/EditRecipe", 
+                                state:{
+                                    editRecipe: true, 
+                                    recipe: this.state.recipe, 
+                                    ingredients: this.state.ingredient, 
+                                    procedure: this.state.procedure,
+                                } 
+                            }} 
+                            className="btn btn-warning editRecipeButton">Edit</Link>
         }
     }
 
@@ -149,25 +176,29 @@ class ViewRecipe extends Component {
         }
     }
 
+    setNotification(message, color){
+        this.setState({notificationMessage: message, notificationColor: color})
+    }
+
     recipeEditedNotification(){
         try{
-            if(this.props.location.state.editedRecipe === true){
-                return <p className="updateRecipeMessage">{this.props.location.state.notification}</p>
+            if(this.props.location.state.notification === true){
+                return <Notification message={this.props.location.state.message} color={this.props.location.state.color} />
             }
-        } catch(e){}
+        } catch(e){
+        }
     }
 
     render() {
         var editButton = this.displayEditButton();
         var deleteButton = this.displayDeleteButton();
         var saveButton = this.displaySaveButton();
-        var recipeEditedNotification = this.recipeEditedNotification();
+        var Notification = this.recipeEditedNotification();
         var keySymbol = this.displaySecretRecipeKey();
-
         return (
             <div>
                 <Navbar />
-                {recipeEditedNotification} 
+                {Notification}
                 <div className="container viewRecipeTopDiv">
                     <h1 className="recipeTitle">{this.state.recipe.Name} {keySymbol}</h1>
                     <h5 className="recipeTitle">{this.state.recipe.Cooking_Time} Minutes</h5>
@@ -185,9 +216,21 @@ class ViewRecipe extends Component {
                             <CookingProcedure recipeId={this.state.recipeId}/>
                         </div>
                     </div>
-                    <div className="row justify-content-center descriptionDiv" style={{marginTop: "50px"}}>
+                    <div className="row justify-content-center descriptionDiv" style={{marginTop: "50px", marginBottom: "50px"}}>
                         <h4 className="col-md-12 col-sm-12" style={{textAlign: "center"}}>Desciption</h4>
                         <p className="recipeTitle col-12" style={{fontSize:"18px"}}>{this.state.recipe.Description}</p>
+                    </div>
+                    <hr />
+                    <div className="row">
+                        <p className="col-lg-12">Created by: {this.state.username}</p>
+                        <p className="col-lg-12">Saves: {this.state.saves}</p>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12" style={{marginBottom:"150px"}}>
+                        <DropdownButton id="dropdown-variants-success" variant="secondary" title="Actions">
+                            <Dropdown.Item onClick={this.redirectToReportRecipe}>Report</Dropdown.Item>
+                        </DropdownButton>
+                        </div>
                     </div>
                 </div>               
             </div>
